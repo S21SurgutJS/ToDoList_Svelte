@@ -1,12 +1,35 @@
-<script>
+<script lang="ts">
 	import Controls from '../components/Controls.svelte';
 	import ToDoList from '../components/ToDoList.svelte';
+  type Item = {
+		id: number
+		name: string
+		isDone: boolean
+	}
+
+	let items: Item[] = [
+		{
+			id: 1,
+			name: 'Todo',
+			isDone: true
+		},
+	  {
+			id: 2,
+			name: 'Todo',
+			isDone: false
+		},
+	  {
+			id: 3,
+			name: 'Todo',
+			isDone: false
+		}
+	];
 </script>
 
 <div class="page-wrapper">
 	<div class="container">
 		<Controls />
-    <ToDoList />
+    <ToDoList bind:items />
 	</div>
 </div>
 

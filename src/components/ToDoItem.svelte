@@ -1,7 +1,13 @@
+<script lang="ts">
+  // export let id: number;
+  export let name: string;
+  export let isDone: boolean;
+</script>
+
 <li class="todo-list__item">
 	<label class="todo-list__label">
-		<input type="checkbox" class="todo-list__checkbox" />
-		<p class="todo-list__text">Some task ToDo</p>
+		<input type="checkbox" class="todo-list__checkbox" checked = {isDone}/>
+		<p class="todo-list__text">{name}</p>
 	</label>
 	<button class="todo-list__btn" />
 </li>
@@ -16,7 +22,7 @@
 		background-color: #ffebeb;
 		list-style: none;
 	}
-  
+
 	.todo-list__label {
 		display: grid;
 		grid-template-columns: auto 1fr;
@@ -45,7 +51,7 @@
 		height: 100%;
 		border: none;
 		background-color: transparent;
-		background-image: url('./img/bascket.svg');
+		background-image: url("./basket.svg");
 		background-repeat: no-repeat;
 		background-position: center center;
 		opacity: 0.5;
@@ -87,8 +93,5 @@
 			background-size: 20px;
 		}
 
-		.controls__btn:hover {
-			border-radius: 0 0 10px 10px;
-		}
 	}
 </style>

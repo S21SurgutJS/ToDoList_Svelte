@@ -1,9 +1,17 @@
-<script>
+<script lang="ts">
 	import ToDoItem from './ToDoItem.svelte';
+  type Item = {
+		id: number
+		name: string
+		isDone: boolean
+	}
+  export let items: Item[];
 </script>
 
 <ul class="todo-list">
-	<ToDoItem />
+	{#each items as item (item.id)}
+		<ToDoItem {...item} />
+	{/each}
 </ul>
 
 <style>

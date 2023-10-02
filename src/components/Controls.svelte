@@ -1,9 +1,10 @@
-<script>
+<script lang="ts">
+  let inputValue:string;
   
 </script>
 
-<form class="controls">
-	<input type="text" class="controls__input" value="" name="Название задачи" />
+<form class="controls" on:submit>
+	<input type="text" class="controls__input" name="Название задачи" bind:value={inputValue}/>
 	<button class="controls__btn">Добавить</button>
 </form>
 
