@@ -21,16 +21,21 @@
 		}
 	];
 
-	function addTodoItem(event: any) {
+	function addTodoItem(event: CustomEvent<{text:string}>) {
 		console.log('func start');
 		const toDoText = event.detail;
+		console.log(toDoText);
 	}
 </script>
 
 <div class="page-wrapper">
 	<div class="container">
 		<Controls />
-		<ToDoList {items} on:add={addTodoItem} />
+		<ToDoList
+			{items}
+			on:add={addTodoItem}
+			on:someNew={addTodoItem}
+		/>
 	</div>
 </div>
 

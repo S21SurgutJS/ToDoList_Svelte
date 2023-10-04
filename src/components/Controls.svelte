@@ -5,17 +5,24 @@
 
 	const dispatch = createEventDispatcher();
 
-	function addTodo(value: string) {
-		console.log('addTodo, value', value);
+	function addTodo() {
+		console.log('addTodo, value', inputValue);
 		dispatch('add', {text: 'text'});
-		// inputValue = '';
+		inputValue = '';
+	}
+	function fromButton() {
+		console.log('formButton');
+		dispatch('someNew', 'text');
 	}
 </script>
 
-<form class="controls" on:submit|preventDefault={() => addTodo(inputValue)}>
+<form class="controls" on:submit|preventDefault={addTodo}>
 	<input type="text" class="controls__input" name="Название задачи" bind:value={inputValue} />
-	<button class="controls__btn">Добавить</button>
+	<button class="controls__btn" >Добавить</button>
 </form>
+<button on:click={fromButton}>
+	Нажми меня
+</button>
 
 <style>
 	.controls {
