@@ -1,11 +1,7 @@
 <script lang="ts">
 	import Controls from '../components/Controls.svelte';
 	import ToDoList from '../components/ToDoList.svelte';
-  type Item = {
-		id: number
-		name: string
-		isDone: boolean
-	}
+	import type { Item } from '$lib/types';
 
 	let items: Item[] = [
 		{
@@ -13,23 +9,28 @@
 			name: 'Todo',
 			isDone: true
 		},
-	  {
+		{
 			id: 2,
 			name: 'Todo',
 			isDone: false
 		},
-	  {
+		{
 			id: 3,
 			name: 'Todo',
 			isDone: false
 		}
 	];
+
+	function addTodoItem(event: any) {
+		console.log('func start');
+		const toDoText = event.detail;
+	}
 </script>
 
 <div class="page-wrapper">
 	<div class="container">
 		<Controls />
-    <ToDoList bind:items />
+		<ToDoList {items} on:add={addTodoItem} />
 	</div>
 </div>
 

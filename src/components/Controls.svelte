@@ -1,10 +1,19 @@
 <script lang="ts">
-  let inputValue:string;
-  
+	import { createEventDispatcher } from 'svelte';
+
+	let inputValue: string;
+
+	const dispatch = createEventDispatcher();
+
+	function addTodo(value: string) {
+		console.log('addTodo, value', value);
+		dispatch('add', {text: 'text'});
+		// inputValue = '';
+	}
 </script>
 
-<form class="controls" on:submit>
-	<input type="text" class="controls__input" name="Название задачи" bind:value={inputValue}/>
+<form class="controls" on:submit|preventDefault={() => addTodo(inputValue)}>
+	<input type="text" class="controls__input" name="Название задачи" bind:value={inputValue} />
 	<button class="controls__btn">Добавить</button>
 </form>
 
