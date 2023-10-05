@@ -22,10 +22,10 @@
 	];
 	let id = 4;
 
-	function addTodoItem(event: CustomEvent<{inputValue:string}>) {
+	function addTodoItem(event: CustomEvent<string>) {
 		const item: Item = {
 			id: id++,
-			text: event.detail.inputValue,
+			text: event.detail,
 			isDone: false,
 		}
 		items = [...items, item];

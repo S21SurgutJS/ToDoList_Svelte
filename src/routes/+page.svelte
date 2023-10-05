@@ -7,6 +7,15 @@
 </div>
 
 <style>
+	:global(*) {
+		box-sizing: border-box;
+	}
+	
+	:global(html, body) {
+		margin: 0;
+		padding: 0;
+	}
+
 	.page-wrapper {
 		display: flex;
 		padding: 15px;

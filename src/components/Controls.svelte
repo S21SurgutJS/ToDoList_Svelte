@@ -7,7 +7,7 @@
 
 	function addTodo() {
 		if(inputValue.trim()){
-			dispatch('add', {inputValue});
+			dispatch('add', inputValue);
 		}
 		inputValue = '';
 	}
