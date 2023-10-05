@@ -1,14 +1,30 @@
 <script lang="ts">
-  export let text: string;
-  export let isDone: boolean;
+	import { createEventDispatcher } from 'svelte';
+
+	export let id: number;
+	export let text: string;
+	export let isDone: boolean;
+
+	const dispatch = createEventDispatcher();
+	function removeItem() {
+		dispatch('remove', id);
+	}
+	function updateItem() {
+		dispatch('update', {isDone: !isDone, id});
+	}
 </script>
 
 <li class="todo-list__item">
 	<label class="todo-list__label">
-		<input type="checkbox" class="todo-list__checkbox" checked = {isDone}/>
+		<input
+			type="checkbox"
+			class="todo-list__checkbox"
+			checked={isDone}
+			on:change={updateItem}
+		/>
 		<p class="todo-list__text">{text}</p>
 	</label>
-	<button class="todo-list__btn" />
+	<button class="todo-list__btn" on:click={removeItem} />
 </li>
 
 <style>
@@ -50,7 +66,7 @@
 		height: 100%;
 		border: none;
 		background-color: transparent;
-		background-image: url("./basket.svg");
+		background-image: url('./basket.svg');
 		background-repeat: no-repeat;
 		background-position: center center;
 		opacity: 0.5;
@@ -91,6 +107,5 @@
 			width: 50px;
 			background-size: 20px;
 		}
-
 	}
 </style>

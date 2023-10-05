@@ -30,6 +30,16 @@
 		}
 		items = [...items, item];
 	}
+
+	function removeTodoItem(event: CustomEvent<number>) {
+		let itemId = event.detail;
+		console.log(event.detail);
+		items = items.filter((item) => item.id !== itemId);
+	}
+
+	// function updateTodoItem(event: CustomEvent<{isDone: boolean, id: number}>) {
+
+	// }
 </script>
 
 <div class="page-wrapper">
@@ -39,6 +49,8 @@
 		/>
 		<ToDoList
 			{items}
+			on:remove={removeTodoItem}
+			on:update={updateTodoItem}
 		/>
 	</div>
 </div>
