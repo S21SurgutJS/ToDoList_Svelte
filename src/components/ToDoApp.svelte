@@ -5,7 +5,7 @@
 	import { onMount } from 'svelte';
 
 	let items: Item[] = [];
-	let id = 4;
+	let id = 1;
 	let todoKey = 'todoList';
 
 	function addTodoItem(event: CustomEvent<string>) {
