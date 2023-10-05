@@ -6,7 +6,9 @@
 	const dispatch = createEventDispatcher();
 
 	function addTodo() {
-		dispatch('add', {inputValue});
+		if(inputValue.trim()){
+			dispatch('add', {inputValue});
+		}
 		inputValue = '';
 	}
 </script>

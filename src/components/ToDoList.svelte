@@ -5,7 +5,7 @@
 </script>
 
 <ul class="todo-list">
-	{#each items as item}
+	{#each items as item (item.id)}
 		<ToDoItem {...item} />
 	{/each}
 </ul>
