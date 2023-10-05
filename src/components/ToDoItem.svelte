@@ -1,12 +1,12 @@
 <script lang="ts">
-  export let name: string;
+  export let text: string;
   export let isDone: boolean;
 </script>
 
 <li class="todo-list__item">
 	<label class="todo-list__label">
 		<input type="checkbox" class="todo-list__checkbox" checked = {isDone}/>
-		<p class="todo-list__text">{name}</p>
+		<p class="todo-list__text">{text}</p>
 	</label>
 	<button class="todo-list__btn" />
 </li>

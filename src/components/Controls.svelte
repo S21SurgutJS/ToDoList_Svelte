@@ -6,13 +6,8 @@
 	const dispatch = createEventDispatcher();
 
 	function addTodo() {
-		console.log('addTodo, value', inputValue);
-		dispatch('add', {text: 'text'});
+		dispatch('add', {inputValue});
 		inputValue = '';
-	}
-	function fromButton() {
-		console.log('formButton');
-		dispatch('someNew', 'text');
 	}
 </script>
 
@@ -20,9 +15,6 @@
 	<input type="text" class="controls__input" name="Название задачи" bind:value={inputValue} />
 	<button class="controls__btn" >Добавить</button>
 </form>
-<button on:click={fromButton}>
-	Нажми меня
-</button>
 
 <style>
 	.controls {

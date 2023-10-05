@@ -1,12 +1,11 @@
 <script lang="ts">
 	import ToDoItem from './ToDoItem.svelte';
 	import type { Item } from '$lib/types';
-	
 	export let items: Item[];
 </script>
 
 <ul class="todo-list">
-	{#each items as item (item.id)}
+	{#each items as item}
 		<ToDoItem {...item} />
 	{/each}
 </ul>
