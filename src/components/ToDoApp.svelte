@@ -32,14 +32,14 @@
 	}
 
 	function removeTodoItem(event: CustomEvent<number>) {
-		let itemId = event.detail;
-		console.log(event.detail);
-		items = items.filter((item) => item.id !== itemId);
+		items = items.filter((item) => item.id !== event.detail);
 	}
 
-	// function updateTodoItem(event: CustomEvent<{isDone: boolean, id: number}>) {
-
-	// }
+	function updateTodoItem(event: CustomEvent<{isDone: boolean, id: number}>) {
+		const item = items.find(item => item.id === event.detail.id);
+		if (item) item.isDone = event.detail.isDone;
+		items = [...items];
+	}
 </script>
 
 <div class="page-wrapper">
