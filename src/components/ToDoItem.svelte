@@ -9,6 +9,7 @@
 	function removeItem() {
 		dispatch('remove', id);
 	}
+	
 	function updateItem() {
 		dispatch('update', {isDone: !isDone, id});
 	}
@@ -17,6 +18,7 @@
 <li class="todo-list__item">
 	<label class="todo-list__label">
 		<input
+			name="isDone"
 			type="checkbox"
 			class="todo-list__checkbox"
 			checked={isDone}

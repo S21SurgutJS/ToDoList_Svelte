@@ -2,24 +2,9 @@
 	import Controls from '../components/Controls.svelte';
 	import ToDoList from '../components/ToDoList.svelte';
   import type {Item} from '$lib/types';
+	import { onMount } from 'svelte';
 
-	let items: Item[] = [
-		{
-			id: 1,
-			text: 'Todo',
-			isDone: true
-		},
-		{
-			id: 2,
-			text: 'Todo',
-			isDone: false
-		},
-		{
-			id: 3,
-			text: 'Todo',
-			isDone: false
-		}
-	];
+	let items: Item[] = [];
 	let id = 4;
 	let todoKey = 'todoList';
 
@@ -49,20 +34,20 @@
   	localStorage.setItem(todoKey, JSON.stringify(items));
 	}
 
+	onMount(init);
 	function init() {
-  if (localStorage.length) {
-    clear()
-    items = [...JSON.parse(localStorage.getItem(todoKey)];
+  if (localStorage.length != 0) {
+    clear();
+		const tmp = localStorage.getItem(todoKey);
+    items = tmp != null ? JSON.parse(tmp) : [];
   }
   if (items.length) {
-    id = Math.max(...items.map(item => item.id));
+    id = Math.max(...items.map(item => item.id)) + 1;
   }
-  console.log(items);
 }
 
 function clear() {
   items.splice(0, items.length)
-  updateLocalStorage();
 }
 </script>
 

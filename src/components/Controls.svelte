@@ -13,8 +13,8 @@
 	}
 </script>
 
-<form class="controls" on:submit|preventDefault={addTodo}>
-	<input type="text" class="controls__input" name="Название задачи" bind:value={inputValue} />
+<form class="controls" on:submit|preventDefault={addTodo} >
+	<input type="text" class="controls__input" name="todo name" bind:value={inputValue} />
 	<button class="controls__btn" >Добавить</button>
 </form>
 
