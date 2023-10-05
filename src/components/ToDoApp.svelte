@@ -21,6 +21,7 @@
 		}
 	];
 	let id = 4;
+	let todoKey = 'todoList';
 
 	function addTodoItem(event: CustomEvent<string>) {
 		const item: Item = {
@@ -29,17 +30,40 @@
 			isDone: false,
 		}
 		items = [...items, item];
+		updateLocalStorage();
 	}
 
 	function removeTodoItem(event: CustomEvent<number>) {
 		items = items.filter((item) => item.id !== event.detail);
+		updateLocalStorage();
 	}
 
 	function updateTodoItem(event: CustomEvent<{isDone: boolean, id: number}>) {
 		const item = items.find(item => item.id === event.detail.id);
 		if (item) item.isDone = event.detail.isDone;
 		items = [...items];
+		updateLocalStorage();
 	}
+
+	function updateLocalStorage() {
+  	localStorage.setItem(todoKey, JSON.stringify(items));
+	}
+
+	function init() {
+  if (localStorage.length) {
+    clear()
+    items = [...JSON.parse(localStorage.getItem(todoKey)];
+  }
+  if (items.length) {
+    id = Math.max(...items.map(item => item.id));
+  }
+  console.log(items);
+}
+
+function clear() {
+  items.splice(0, items.length)
+  updateLocalStorage();
+}
 </script>
 
 <div class="page-wrapper">
