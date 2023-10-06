@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { createEventDispatcher } from 'svelte';
 
-	export let id: number;
+	export let id: string;
 	export let text: string;
 	export let isDone: boolean;
 
@@ -9,7 +9,7 @@
 	function removeItem() {
 		dispatch('remove', id);
 	}
-	
+
 	function updateItem() {
 		dispatch('update', {isDone: !isDone, id});
 	}
