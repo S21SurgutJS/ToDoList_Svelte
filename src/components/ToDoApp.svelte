@@ -51,7 +51,6 @@ function clear() {
 }
 </script>
 
-<div class="page-wrapper">
 	<div class="container">
 		<Controls
 			on:add={addTodoItem}
@@ -62,17 +61,8 @@ function clear() {
 			on:update={updateTodoItem}
 		/>
 	</div>
-</div>
 
 <style>
-	.page-wrapper {
-		display: flex;
-		padding: 15px;
-		height: 100vh;
-		align-items: center;
-		justify-content: center;
-	}
-
 	.container {
 		display: grid;
 		grid-template-rows: auto 1fr;

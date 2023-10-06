@@ -9,7 +9,7 @@
 	function removeItem() {
 		dispatch('remove', id);
 	}
-	
+
 	function updateItem() {
 		dispatch('update', {isDone: !isDone, id});
 	}
