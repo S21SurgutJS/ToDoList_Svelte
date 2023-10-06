@@ -3,14 +3,14 @@
 	import ToDoList from '../components/ToDoList.svelte';
   import type {Item} from '$lib/types';
 	import { onMount } from 'svelte';
+	import {v4 as uuidv4} from 'uuid';
 
 	let items: Item[] = [];
-	let id = 1;
 	let todoKey = 'todoList';
 
 	function addTodoItem(event: CustomEvent<string>) {
 		const item: Item = {
-			id: id++,
+			id: uuidv4(),
 			text: event.detail,
 			isDone: false,
 		}
@@ -18,12 +18,12 @@
 		updateLocalStorage();
 	}
 
-	function removeTodoItem(event: CustomEvent<number>) {
+	function removeTodoItem(event: CustomEvent<string>) {
 		items = items.filter((item) => item.id !== event.detail);
 		updateLocalStorage();
 	}
 
-	function updateTodoItem(event: CustomEvent<{isDone: boolean, id: number}>) {
+	function updateTodoItem(event: CustomEvent<{isDone: boolean, id: string}>) {
 		const item = items.find(item => item.id === event.detail.id);
 		if (item) item.isDone = event.detail.isDone;
 		items = [...items];
@@ -40,9 +40,6 @@
     clear();
 		const tmp = localStorage.getItem(todoKey);
     items = tmp != null ? JSON.parse(tmp) : [];
-  }
-  if (items.length) {
-    id = Math.max(...items.map(item => item.id)) + 1;
   }
 }
 
