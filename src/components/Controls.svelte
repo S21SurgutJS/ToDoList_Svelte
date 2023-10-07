@@ -9,6 +9,7 @@
 		if(inputValue.trim()){
 			dispatch('add', inputValue);
 		}
+		else alert('field id empty');
 		inputValue = '';
 	}
 </script>

@@ -36,6 +36,7 @@
 
 	onMount(init);
 	function init() {
+		console.log('update');
   if (localStorage.length != 0) {
     clear();
 		const tmp = localStorage.getItem(todoKey);
@@ -73,10 +74,6 @@ function clear() {
 	}
 
 	@media (max-width: 480px) {
-		.page-wrapper {
-			padding: 0;
-		}
-
 		.container {
 			padding: 20px;
 		}

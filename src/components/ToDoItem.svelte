@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { createEventDispatcher } from 'svelte';
-
+	import { fade } from 'svelte/transition';
 	export let id: string;
 	export let text: string;
 	export let isDone: boolean;
@@ -11,11 +11,11 @@
 	}
 
 	function updateItem() {
-		dispatch('update', {isDone: !isDone, id});
+		dispatch('update', { isDone: !isDone, id });
 	}
 </script>
 
-<li class="todo-list__item">
+<li class="todo-list__item" transition:fade>
 	<label class="todo-list__label">
 		<input
 			name="isDone"
