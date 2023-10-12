@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { createEventDispatcher } from 'svelte';
-	import { fade } from 'svelte/transition';
+	import { fly } from 'svelte/transition';
 	export let id: string;
 	export let text: string;
 	export let isDone: boolean;
@@ -15,7 +15,7 @@
 	}
 </script>
 
-<li class="todo-list__item" transition:fade>
+<li class="todo-list__item" transition:fly|global={{ x: 200, duration: 400 }}>
 	<label class="todo-list__label">
 		<input
 			name="isDone"
