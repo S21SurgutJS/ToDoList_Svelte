@@ -1,22 +1,26 @@
 <script lang="ts">
 	import { createEventDispatcher } from 'svelte';
 
-	let inputValue: string;
+	let inputValue: string = '';
 
 	const dispatch = createEventDispatcher();
 
 	function addTodo() {
-		if(inputValue.trim()){
+		if (inputValue.trim()) {
 			dispatch('add', inputValue);
-		}
-		else alert('field id empty');
+		} else alert('field id empty');
 		inputValue = '';
 	}
 </script>
 
-<form class="controls" on:submit|preventDefault={addTodo} >
-	<input type="text" class="controls__input" name="todo name" bind:value={inputValue} />
-	<button class="controls__btn" >Добавить</button>
+<form class="controls" on:submit|preventDefault={addTodo}>
+	<input
+		type="text"
+		class="controls__input"
+		name="todo name"
+		bind:value={inputValue}
+	/>
+	<button class="controls__btn">Добавить</button>
 </form>
 
 <style>

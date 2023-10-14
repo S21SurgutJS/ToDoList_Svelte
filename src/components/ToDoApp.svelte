@@ -1,64 +1,67 @@
 <script lang="ts">
 	import Controls from '../components/Controls.svelte';
 	import ToDoList from '../components/ToDoList.svelte';
-  import type {Item} from '$lib/types';
+	import type { Item } from '$lib/types';
 	import { onMount } from 'svelte';
-	import {v4 as uuidv4} from 'uuid';
+	import { v4 as uuidv4 } from 'uuid';
+	import { items } from '$lib/store';
 
-	let items: Item[] = [];
 	let todoKey = 'todoList';
 
 	function addTodoItem(event: CustomEvent<string>) {
 		const item: Item = {
 			id: uuidv4(),
 			text: event.detail,
-			isDone: false,
-		}
-		items = [...items, item];
+			isDone: false
+		};
+		$items = [...$items, item];
 		updateLocalStorage();
 	}
 
 	function removeTodoItem(event: CustomEvent<string>) {
-		items = items.filter((item) => item.id !== event.detail);
+		$items = $items.filter(
+			(item) => item.id !== event.detail
+		);
 		updateLocalStorage();
 	}
 
-	function updateTodoItem(event: CustomEvent<{isDone: boolean, id: string}>) {
-		const item = items.find(item => item.id === event.detail.id);
+	function updateTodoItem(
+		event: CustomEvent<{ isDone: boolean; id: string }>
+	) {
+		const item = $items.find(
+			(item) => item.id === event.detail.id
+		);
 		if (item) item.isDone = event.detail.isDone;
-		items = [...items];
+		$items = [...$items];
 		updateLocalStorage();
 	}
 
 	function updateLocalStorage() {
-  	localStorage.setItem(todoKey, JSON.stringify(items));
+		localStorage.setItem(todoKey, JSON.stringify($items));
 	}
 
 	onMount(init);
 	function init() {
-		console.log('update');
-  if (localStorage.length != 0) {
-    clear();
-		const tmp = localStorage.getItem(todoKey);
-    items = tmp != null ? JSON.parse(tmp) : [];
-  }
-}
+		if (localStorage.length != 0) {
+			clear();
+			const tmp = localStorage.getItem(todoKey);
+			$items = tmp != null ? JSON.parse(tmp) : [];
+		}
+	}
 
-function clear() {
-  items.splice(0, items.length)
-}
+	function clear() {
+		$items = $items.splice(0, $items.length);
+	}
 </script>
 
-	<div class="container">
-		<Controls
-			on:add={addTodoItem}
-		/>
-		<ToDoList
-			{items}
-			on:remove={removeTodoItem}
-			on:update={updateTodoItem}
-		/>
-	</div>
+<div class="container">
+	<Controls on:add={addTodoItem} />
+	<ToDoList
+		bind:items={$items}
+		on:remove={removeTodoItem}
+		on:update={updateTodoItem}
+	/>
+</div>
 
 <style>
 	.container {

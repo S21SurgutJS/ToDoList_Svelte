@@ -6,7 +6,7 @@
 
 <ul class="todo-list">
 	{#each items as item (item.id)}
-		<ToDoItem {...item} on:remove on:update/>
+		<ToDoItem {...item} on:remove on:update />
 	{/each}
 </ul>
 
