@@ -24,7 +24,7 @@
 		name="todo name"
 		bind:value={inputValue}
 	/>
-	{#if emptyValue === true}
+	{#if emptyValue}
 		<span class="controls__empty-value">поле не должно быть пустым</span>
 	{/if}
 	<button class="controls__btn">Добавить</button>
