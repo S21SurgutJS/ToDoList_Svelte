@@ -1,2 +1,32 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<script lang="ts">
+	import ToDoApp from '../components/ToDoApp.svelte';
+</script>
+
+<div class="page-wrapper">
+	<ToDoApp />
+</div>
+
+<style>
+	:global(*) {
+		box-sizing: border-box;
+	}
+	
+	:global(html, body) {
+		margin: 0;
+		padding: 0;
+	}
+
+	.page-wrapper {
+		display: flex;
+		padding: 15px;
+		height: 100vh;
+		align-items: center;
+		justify-content: center;
+	}
+
+	@media (max-width: 480px) {
+		.page-wrapper {
+			padding: 0;
+		}
+	}
+</style>
