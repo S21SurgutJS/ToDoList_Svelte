@@ -26,7 +26,7 @@
 	}
 
 	function updateTodoItem(
-		event: CustomEvent<{ isDone: boolean; id: string }>
+		event: CustomEvent<Omit<Item, 'text'>>
 	) {
 		const item = $items.find(
 			(item) => item.id === event.detail.id
@@ -67,7 +67,7 @@
 	.container {
 		display: grid;
 		grid-template-rows: auto 1fr;
-		gap: 20px;
+		gap: 25px;
 		width: 635px;
 		height: 797px;
 		padding: 40px;

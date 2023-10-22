@@ -2,13 +2,17 @@
 	import { createEventDispatcher } from 'svelte';
 
 	let inputValue: string = '';
+	let emptyValue: boolean = false;
 
 	const dispatch = createEventDispatcher();
 
 	function addTodo() {
 		if (inputValue.trim()) {
 			dispatch('add', inputValue);
-		} else alert('field id empty');
+			emptyValue = false;
+		} else {
+			emptyValue = true;
+		}
 		inputValue = '';
 	}
 </script>
@@ -20,6 +24,9 @@
 		name="todo name"
 		bind:value={inputValue}
 	/>
+	{#if emptyValue === true}
+		<span class="controls__empty-value">поле не должно быть пустым</span>
+	{/if}
 	<button class="controls__btn">Добавить</button>
 </form>
 
@@ -27,6 +34,7 @@
 	.controls {
 		display: grid;
 		grid-template-columns: 5fr 2fr;
+		position: relative;
 	}
 
 	.controls__input {
@@ -36,6 +44,13 @@
 		font-size: 18px;
 		border: none;
 		border-radius: 10px 0 0 10px;
+	}
+
+	.controls__empty-value {
+		position: absolute;
+		top: 70px;
+		font-weight: bold;
+		color: red;
 	}
 
 	.controls__btn {
