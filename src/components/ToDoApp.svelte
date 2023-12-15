@@ -1,63 +1,53 @@
 <script lang="ts">
 	import Controls from '../components/Controls.svelte';
 	import ToDoList from '../components/ToDoList.svelte';
-	import type { Item } from '$lib/types';
+	import type { ITodoItem } from '$lib/types';
 	import { onMount } from 'svelte';
-	import { v4 as uuidv4 } from 'uuid';
-	import { items } from '$lib/store';
+	import { todoApiModule } from '$lib/api';
 
-	let todoKey = 'todoList';
+	let items: ITodoItem[] = [];
 
-	function addTodoItem(event: CustomEvent<string>) {
-		const item: Item = {
-			id: uuidv4(),
+	async function updateTodoList() {
+		items = await todoApiModule.getTodos();
+	}
+
+	async function addTodoItem(event: CustomEvent<string>) {
+		await todoApiModule.addTodo({
 			text: event.detail,
-			isDone: false
-		};
-		$items = [...$items, item];
-		updateLocalStorage();
+			is_done: false
+		});
+		updateTodoList();
 	}
 
-	function removeTodoItem(event: CustomEvent<string>) {
-		$items = $items.filter(
-			(item) => item.id !== event.detail
-		);
-		updateLocalStorage();
-	}
-
-	function updateTodoItem(
-		event: CustomEvent<Omit<Item, 'text'>>
+	async function removeTodoItem(
+		event: CustomEvent<number>
 	) {
-		const item = $items.find(
-			(item) => item.id === event.detail.id
-		);
-		if (item) item.isDone = event.detail.isDone;
-		$items = [...$items];
-		updateLocalStorage();
+		await todoApiModule.removeTodo(event.detail);
+		updateTodoList();
 	}
 
-	function updateLocalStorage() {
-		localStorage.setItem(todoKey, JSON.stringify($items));
+	async function updateTodoItem(
+		event: CustomEvent<ITodoItem>
+	) {
+		await todoApiModule.updateTodo({
+			id: event.detail.id,
+			text: event.detail.text,
+			is_done: event.detail.is_done
+		});
 	}
 
-	onMount(init);
-	function init() {
-		if (localStorage.length != 0) {
-			clear();
-			const tmp = localStorage.getItem(todoKey);
-			$items = tmp != null ? JSON.parse(tmp) : [];
-		}
-	}
+	onMount(updateTodoList);
 
 	function clear() {
-		$items = $items.splice(0, $items.length);
+		items = items.splice(0, items.length);
 	}
 </script>
 
 <div class="container">
 	<Controls on:add={addTodoItem} />
+
 	<ToDoList
-		bind:items={$items}
+		{items}
 		on:remove={removeTodoItem}
 		on:update={updateTodoItem}
 	/>

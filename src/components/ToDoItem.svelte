@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { createEventDispatcher } from 'svelte';
 	import { fly } from 'svelte/transition';
-	export let id: string;
+	export let id: number;
 	export let text: string;
-	export let isDone: boolean;
+	export let is_done: boolean;
 
 	const dispatch = createEventDispatcher();
 	function removeItem() {
@@ -11,7 +11,7 @@
 	}
 
 	function updateItem() {
-		dispatch('update', { isDone: !isDone, id });
+		dispatch('update', { is_done: !is_done, id, text });
 	}
 </script>
 
@@ -24,7 +24,7 @@
 			name="isDone"
 			type="checkbox"
 			class="todo-list__checkbox"
-			checked={isDone}
+			checked={is_done}
 			on:change={updateItem}
 		/>
 		<p class="todo-list__text">{text}</p>

@@ -1,5 +1,5 @@
-export type Item = {
-	id: string;
+export interface ITodoItem {
+	id?: number;
 	text: string;
-	isDone: boolean;
-};
+	is_done?: boolean;
+}

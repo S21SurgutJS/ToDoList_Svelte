@@ -1,7 +1,7 @@
 <script lang="ts">
 	import ToDoItem from './ToDoItem.svelte';
-	import type { Item } from '$lib/types';
-	export let items: Item[];
+	import type { ITodoItem } from '$lib/types';
+	export let items: ITodoItem[];
 </script>
 
 <ul class="todo-list">
