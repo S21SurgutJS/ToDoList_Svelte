@@ -2,13 +2,15 @@
 	import Controls from '../components/Controls.svelte';
 	import ToDoList from '../components/ToDoList.svelte';
 	import type { ITodoItem } from '$lib/types';
-	import { onMount } from 'svelte';
 	import { todoApiModule } from '$lib/api';
 
 	let items: ITodoItem[] = [];
 
+	updateTodoList();
+
 	async function updateTodoList() {
 		items = await todoApiModule.getTodos();
+		console.log('update');
 	}
 
 	async function addTodoItem(event: CustomEvent<string>) {
@@ -16,7 +18,7 @@
 			text: event.detail,
 			is_done: false
 		});
-		updateTodoList();
+		await updateTodoList();
 	}
 
 	async function removeTodoItem(
@@ -26,20 +28,12 @@
 		updateTodoList();
 	}
 
-	async function updateTodoItem(
-		event: CustomEvent<ITodoItem>
-	) {
-		await todoApiModule.updateTodo({
+	function updateTodoItem(event: CustomEvent<ITodoItem>) {
+		todoApiModule.updateTodo({
 			id: event.detail.id,
 			text: event.detail.text,
 			is_done: event.detail.is_done
 		});
-	}
-
-	onMount(updateTodoList);
-
-	function clear() {
-		items = items.splice(0, items.length);
 	}
 </script>
 
